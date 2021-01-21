@@ -13,7 +13,7 @@ Snake::Snake()
     snakeX.push_back(304.f);
     snakeY.push_back(240.f);
     count = 0;
-    speed = 40;
+    speed = 200;
 
     dirX = 0;
     dirY = 0;

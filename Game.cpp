@@ -17,26 +17,20 @@ Game::Game()
 }
 void Game::run()
 {
-    sf::Clock clock;
-    sf::Time timeSinceLastUpdate = sf::Time::Zero;
+    timeSinceLastUpdate = sf::Time::Zero;
 
     while (mWindow.isOpen())
     {
         processEvents();
 
-        timeSinceLastUpdate += clock.restart();
-        while (timeSinceLastUpdate > TimePerFrame)
+        while (clock.getElapsedTime() < TimePerFrame)
         {
-            timeSinceLastUpdate -= TimePerFrame;
             processEvents();
         }
-        if (count == 400)
-        {
-            update(TimePerFrame);
-            render();
-            count = 0;
-        }
-        count++;
+
+        update(clock.getElapsedTime());
+        render();
+        clock.restart();
     }
 }
 
@@ -86,9 +80,6 @@ void Game::processEvents()
         case sf::Event::KeyPressed:
             handlePlayerInput(event.key.code, true);
             break;
-        /*case sf::Event::KeyReleased:
-            handlePlayerInput(event.key.code, false);
-            break;*/
         case sf::Event::Closed:
             mWindow.close();
             break;
@@ -98,21 +89,8 @@ void Game::processEvents()
 
 void Game::update(sf::Time deltaTime)
 {
-    /*
-    sf::Vector2f movement(0.f, 0.f);
-    if (mIsMovingUp)
-        movement.y -= PlayerSpeed;
-    if (mIsMovingDown)
-        movement.y += PlayerSpeed;
-    if (mIsMovingLeft)
-        movement.x -= PlayerSpeed;
-    if (mIsMovingRight)
-        movement.x += PlayerSpeed;
-        */
-
-    //mPlayer.move(movement * deltaTime.asSeconds());
-    SnakeSprite.count++;
-    if ((SnakeSprite.count % SnakeSprite.speed) == 0)
+    timeSinceLastUpdate += deltaTime;
+    if (timeSinceLastUpdate >= sf::milliseconds(SnakeSprite.speed))
     {
 
         if (SnakeSprite.checkBorder())
@@ -125,7 +103,7 @@ void Game::update(sf::Time deltaTime)
             SnakeSprite.moveSnake();
         }
         checkFruit();
-        SnakeSprite.count = 0;
+        timeSinceLastUpdate = sf::Time::Zero;
     }
 }
 

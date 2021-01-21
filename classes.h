@@ -1,5 +1,5 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "SFML/Graphics.hpp"
 #include <vector>
 #include <string>
 
@@ -103,4 +103,6 @@ private:
     sf::Sprite spriteBackground;
     int count;
     const sf::Time TimePerFrame = sf::seconds(1.f / 30.f);
+    sf::Time timeSinceLastUpdate;
+    sf::Clock clock;
 };
