@@ -24,6 +24,7 @@ class GameFont
 public:
     GameFont();
     sf::Font slkscrb;
+    sf::Font kongtext;
 };
 
 class Apple
@@ -52,6 +53,20 @@ public:
 private:
     GameFont fontSlk;
     int scoreCount;
+};
+
+class MainMenu
+{
+public:
+    MainMenu();
+    sf::Text textTitle;
+    sf::Text textPlay;
+    sf::Text textOption;
+    sf::Text textQuit;
+    void draw(sf::RenderWindow &mWindow);
+
+private:
+    GameFont fonts;
 };
 
 class Snake
@@ -92,6 +107,7 @@ private:
     Snake SnakeSprite;
     Apple AppleSprite;
     Score ScoreSprite;
+    MainMenu MainMenuSprite;
 
 private:
     sf::RenderWindow mWindow;

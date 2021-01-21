@@ -6,7 +6,8 @@ Game::Game()
     sf::Vector2i v1(500, 200);
     mWindow.setPosition(v1);
 
-    if (!textureBackground.loadFromFile("snake/Sprite-0005.png"))
+    //if (!textureBackground.loadFromFile("snake/Sprite-0005.png"))
+    if (!textureBackground.loadFromFile("snake/titleScreen.png"))
     {
         // Handle loading error
     }
@@ -14,6 +15,7 @@ Game::Game()
     spriteBackground.setTexture(textureBackground);
     spriteBackground.setPosition(0.f, 0.f);
     count = 0;
+
 }
 void Game::run()
 {
@@ -111,6 +113,7 @@ void Game::render()
 {
     mWindow.clear();
     mWindow.draw(spriteBackground);
+    /*
     LivesSprite.setLivesSpritePosition();
 
     mWindow.draw(LivesSprite.spriteHeart);
@@ -122,6 +125,8 @@ void Game::render()
     SnakeSprite.drawSnake(mWindow);
 
     AppleSprite.drawApple(mWindow);
+    */
+    MainMenuSprite.draw(mWindow);
 
     mWindow.display();
 }

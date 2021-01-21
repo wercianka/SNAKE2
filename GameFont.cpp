@@ -6,4 +6,8 @@ GameFont::GameFont()
     {
         // error...
     }
+    if (!kongtext.loadFromFile("snake/kongtext.ttf"))
+    {
+        // error...
+    }
 }
