@@ -18,14 +18,12 @@ Lives::Lives()
     spriteHeart3.setTexture(textureHeart, false);
     spriteHeart3.setTextureRect(rectSourceSprite);
     spriteHeart3.setPosition(550.f, 52.f);
-
-    count = 0;
 }
 
-void Lives::setLivesSpritePosition()
+void Lives::setLivesSpritePosition(sf::Time deltaTime)
 {
-    count++;
-    if ((count % 1200) == 0)
+    timeSinceLastUpdate += deltaTime;
+    if (timeSinceLastUpdate >= sf::seconds(4))
     {
         if (rectSourceSprite.left == 32)
         {
@@ -33,18 +31,18 @@ void Lives::setLivesSpritePosition()
             {
                 rectSourceSprite.top = 0;
                 rectSourceSprite.left = 0;
-                count = 0;
+                timeSinceLastUpdate = sf::Time::Zero;
             }
             else
             {
                 rectSourceSprite.top += 32;
-                count -= 120;
+                timeSinceLastUpdate -= sf::milliseconds(600);
             }
         }
         else
         {
             rectSourceSprite.left += 32;
-            count -= 120;
+            timeSinceLastUpdate -= sf::milliseconds(600);
         }
 
         spriteHeart.setTextureRect(rectSourceSprite);

@@ -17,6 +17,7 @@ void Game::run(sf::RenderWindow &mWindow, GameStates &CurrentState)
 {
     sf::Clock clock;
     timeSinceLastUpdate = sf::Time::Zero;
+    LivesSprite.timeSinceLastUpdate = sf::Time::Zero;
 
     ScoreSprite->reset();
     SnakeSprite.reset();
@@ -31,9 +32,11 @@ void Game::run(sf::RenderWindow &mWindow, GameStates &CurrentState)
         }
 
         update(clock.getElapsedTime());
+        LivesSprite.setLivesSpritePosition(clock.getElapsedTime());
         render(mWindow);
         clock.restart();
     }
+    mWindow.clear();
     CurrentState = GameOverState;
 }
 
@@ -123,8 +126,6 @@ void Game::render(sf::RenderWindow &mWindow)
 {
     mWindow.clear();
     mWindow.draw(spriteBackground);
-
-    LivesSprite.setLivesSpritePosition();
 
     mWindow.draw(LivesSprite.spriteHeart);
     mWindow.draw(LivesSprite.spriteHeart2);

@@ -11,11 +11,11 @@ public:
     sf::Sprite spriteHeart;
     sf::Sprite spriteHeart2;
     sf::Sprite spriteHeart3;
-    void setLivesSpritePosition();
+    void setLivesSpritePosition(sf::Time deltaTime);
+    sf::Time timeSinceLastUpdate;
 
 private:
     sf::Texture textureHeart;
-
     sf::IntRect rectSourceSprite = sf::IntRect(0, 0, 32, 32);
     int count;
 };
