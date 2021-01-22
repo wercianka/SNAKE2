@@ -1,13 +1,8 @@
 #include "classes.h"
 
 Game::Game()
-    : mWindow(sf::VideoMode(640, 480), "Snake", sf::Style::Titlebar | sf::Style::Close)
 {
-    sf::Vector2i v1(500, 200);
-    mWindow.setPosition(v1);
-
-    //if (!textureBackground.loadFromFile("snake/Sprite-0005.png"))
-    if (!textureBackground.loadFromFile("snake/titleScreen.png"))
+    if (!textureBackground.loadFromFile("snake/Sprite-0005.png"))
     {
         // Handle loading error
     }
@@ -15,28 +10,30 @@ Game::Game()
     spriteBackground.setTexture(textureBackground);
     spriteBackground.setPosition(0.f, 0.f);
     count = 0;
-
+    isAlive = true;
 }
-void Game::run()
+void Game::run(sf::RenderWindow &mWindow, GameStates &CurrentState)
 {
+    sf::Clock clock;
     timeSinceLastUpdate = sf::Time::Zero;
 
-    while (mWindow.isOpen())
+    while (mWindow.isOpen() && isAlive)
     {
-        processEvents();
+        processEvents(mWindow);
 
         while (clock.getElapsedTime() < TimePerFrame)
         {
-            processEvents();
+            processEvents(mWindow);
         }
 
         update(clock.getElapsedTime());
-        render();
+        render(mWindow);
         clock.restart();
     }
+    CurrentState = GameOverState;
 }
 
-void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
+void Game::handlePlayerInput(sf::Keyboard::Key key)
 {
     if (key == sf::Keyboard::W)
     {
@@ -72,7 +69,7 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
     }
 }
 
-void Game::processEvents()
+void Game::processEvents(sf::RenderWindow &mWindow)
 {
     sf::Event event;
     while (mWindow.pollEvent(event))
@@ -80,10 +77,11 @@ void Game::processEvents()
         switch (event.type)
         {
         case sf::Event::KeyPressed:
-            handlePlayerInput(event.key.code, true);
+            handlePlayerInput(event.key.code);
             break;
         case sf::Event::Closed:
             mWindow.close();
+
             break;
         }
     }
@@ -109,11 +107,11 @@ void Game::update(sf::Time deltaTime)
     }
 }
 
-void Game::render()
+void Game::render(sf::RenderWindow &mWindow)
 {
     mWindow.clear();
     mWindow.draw(spriteBackground);
-    /*
+
     LivesSprite.setLivesSpritePosition();
 
     mWindow.draw(LivesSprite.spriteHeart);
@@ -125,8 +123,8 @@ void Game::render()
     SnakeSprite.drawSnake(mWindow);
 
     AppleSprite.drawApple(mWindow);
-    */
-    MainMenuSprite.draw(mWindow);
+
+    //MainMenuSprite.draw(mWindow);
 
     mWindow.display();
 }

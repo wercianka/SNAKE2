@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include <vector>
 #include <string>
+#include "helpers.h"
 
 class Lives
 {
@@ -59,14 +60,27 @@ class MainMenu
 {
 public:
     MainMenu();
+    void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
+
+private:
     sf::Text textTitle;
     sf::Text textPlay;
     sf::Text textOption;
     sf::Text textQuit;
-    void draw(sf::RenderWindow &mWindow);
 
-private:
+    sf::Texture textureBackground;
+    sf::Sprite spriteBackground;
+
+    void render(sf::RenderWindow &mWindow);
+    void processEvents(sf::RenderWindow &mWindow);
+    void update();
+    void handlePlayerInput(sf::Keyboard::Key key);
+    void changeCurrent();
     GameFont fonts;
+
+    CurrentMenu current;
+    bool PressedEnter;
+    int dir;
 };
 
 class Snake
@@ -95,30 +109,27 @@ class Game
 {
 public:
     Game();
-    void run();
+    void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
 
 private:
-    void processEvents();
+    void processEvents(sf::RenderWindow &mWindow);
     void update(sf::Time deltaTime);
-    void render();
-    void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
+    void render(sf::RenderWindow &mWindow);
+    void handlePlayerInput(sf::Keyboard::Key key);
     void checkFruit();
     Lives LivesSprite;
     Snake SnakeSprite;
     Apple AppleSprite;
     Score ScoreSprite;
-    MainMenu MainMenuSprite;
 
 private:
-    sf::RenderWindow mWindow;
     bool mIsMovingLeft;
     bool mIsMovingRight;
     bool mIsMovingDown;
     bool mIsMovingUp;
+    bool isAlive;
     sf::Texture textureBackground;
     sf::Sprite spriteBackground;
     int count;
-    const sf::Time TimePerFrame = sf::seconds(1.f / 30.f);
     sf::Time timeSinceLastUpdate;
-    sf::Clock clock;
 };
