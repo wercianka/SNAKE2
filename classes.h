@@ -45,21 +45,21 @@ private:
 class Score
 {
 public:
-    Score();
+    Score(GameFont &fonts);
     sf::Text textScore;
     sf::Text textNumber;
     void draw(sf::RenderWindow &mWindow);
     void updateNumber();
+    void changePositionGameOver();
 
 private:
-    GameFont fontSlk;
     int scoreCount;
 };
 
 class MainMenu
 {
 public:
-    MainMenu();
+    MainMenu(GameFont &fonts);
     void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
 
 private:
@@ -76,11 +76,26 @@ private:
     void update();
     void handlePlayerInput(sf::Keyboard::Key key);
     void changeCurrent();
-    GameFont fonts;
 
     CurrentMenu current;
     bool PressedEnter;
     int dir;
+};
+
+class GameOver
+{
+public:
+    GameOver(GameFont &fonts, Score *ScoreClass);
+    void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
+
+private:
+    void render(sf::RenderWindow &mWindow);
+    void processEvents(sf::RenderWindow &mWindow);
+    void handlePlayerInput(sf::Keyboard::Key key);
+    sf::Texture textureBackground;
+    sf::Sprite spriteBackground;
+    Score *ScoreSprite;
+    bool PressedEnter;
 };
 
 class Snake
@@ -108,7 +123,7 @@ private:
 class Game
 {
 public:
-    Game();
+    Game(Score *ScoreClass);
     void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
 
 private:
@@ -120,7 +135,7 @@ private:
     Lives LivesSprite;
     Snake SnakeSprite;
     Apple AppleSprite;
-    Score ScoreSprite;
+    Score *ScoreSprite;
 
 private:
     bool mIsMovingLeft;

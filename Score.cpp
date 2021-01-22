@@ -1,9 +1,9 @@
 #include "classes.h"
 
-Score::Score()
+Score::Score(GameFont &fonts)
 {
-    textScore.setFont(fontSlk.slkscrb);
-    textNumber.setFont(fontSlk.slkscrb);
+    textScore.setFont(fonts.slkscrb);
+    textNumber.setFont(fonts.slkscrb);
     textScore.setString("SCORE");
     textScore.setCharacterSize(32);
     textScore.setFillColor(sf::Color::White);
@@ -27,4 +27,10 @@ void Score::updateNumber()
 {
     scoreCount++;
     textNumber.setString(std::to_string(scoreCount));
+}
+
+void Score::changePositionGameOver()
+{
+    textScore.setPosition(100.f, 202.f);
+    textNumber.setPosition(240.f, 202.f);
 }

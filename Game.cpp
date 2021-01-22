@@ -1,6 +1,6 @@
 #include "classes.h"
 
-Game::Game()
+Game::Game(Score *ScoreClass)
 {
     if (!textureBackground.loadFromFile("snake/Sprite-0005.png"))
     {
@@ -11,6 +11,7 @@ Game::Game()
     spriteBackground.setPosition(0.f, 0.f);
     count = 0;
     isAlive = true;
+    ScoreSprite = ScoreClass;
 }
 void Game::run(sf::RenderWindow &mWindow, GameStates &CurrentState)
 {
@@ -118,7 +119,7 @@ void Game::render(sf::RenderWindow &mWindow)
     mWindow.draw(LivesSprite.spriteHeart2);
     mWindow.draw(LivesSprite.spriteHeart3);
 
-    ScoreSprite.draw(mWindow);
+    ScoreSprite->draw(mWindow);
 
     SnakeSprite.drawSnake(mWindow);
 
@@ -138,6 +139,6 @@ void Game::checkFruit()
         SnakeSprite.total++;
         SnakeSprite.snakeX.push_back(SnakeSprite.snakeX[0]);
         SnakeSprite.snakeY.push_back(SnakeSprite.snakeY[0]);
-        ScoreSprite.updateNumber();
+        ScoreSprite->updateNumber();
     }
 }

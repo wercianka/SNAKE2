@@ -1,7 +1,6 @@
 #include "classes.h"
-//#include <iostream>
 
-MainMenu::MainMenu()
+MainMenu::MainMenu(GameFont &fonts)
 {
     if (!textureBackground.loadFromFile("snake/titleScreen.png"))
     {
@@ -43,10 +42,9 @@ MainMenu::MainMenu()
 void MainMenu::run(sf::RenderWindow &mWindow, GameStates &CurrentState)
 {
     sf::Clock clock;
-    sf::Time timeSinceLastUpdate = sf::Time::Zero;
+    clock.restart();
     while (mWindow.isOpen() && !PressedEnter)
     {
-        //std::cout << "start" << std::endl;
         processEvents(mWindow);
 
         while (clock.getElapsedTime() < TimePerFrame)
@@ -110,7 +108,6 @@ void MainMenu::handlePlayerInput(sf::Keyboard::Key key)
 
 void MainMenu::update()
 {
-    //std::cout << "update" << std::endl;
     if (dir != 0)
     {
         changeCurrent();
@@ -166,7 +163,6 @@ void MainMenu::changeCurrent()
 
 void MainMenu::render(sf::RenderWindow &mWindow)
 {
-    //std::cout << "render" << std::endl;
     mWindow.clear();
     mWindow.draw(spriteBackground);
 

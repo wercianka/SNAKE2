@@ -6,9 +6,14 @@ int main()
     sf::Vector2i v1(500, 200);
     mWindow.setPosition(v1);
 
-    GameStates CurrentState = MenuState;
-    Game game;
-    MainMenu menu;
+    GameStates CurrentState = GameOverState;
+    GameFont fonts;
+
+    Score gamesScore(fonts);
+    Game game(&gamesScore);
+    GameOver gameOverScreen(fonts, &gamesScore);
+
+    MainMenu menu(fonts);
     while (mWindow.isOpen())
     {
         switch (CurrentState)
@@ -24,6 +29,7 @@ int main()
             game.run(mWindow, CurrentState);
             break;
         case GameOverState:
+            gameOverScreen.run(mWindow, CurrentState);
             break;
         case HighScoreState:
             break;
