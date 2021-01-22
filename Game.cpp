@@ -18,6 +18,9 @@ void Game::run(sf::RenderWindow &mWindow, GameStates &CurrentState)
     sf::Clock clock;
     timeSinceLastUpdate = sf::Time::Zero;
 
+    ScoreSprite->reset();
+    SnakeSprite.reset();
+
     while (mWindow.isOpen() && isAlive)
     {
         processEvents(mWindow);
@@ -103,7 +106,15 @@ void Game::update(sf::Time deltaTime)
         {
             SnakeSprite.moveSnake();
         }
-        checkFruit();
+
+        if (SnakeSprite.checkCollision())
+        {
+            isAlive = false;
+        }
+        else
+        {
+            checkFruit();
+        }
         timeSinceLastUpdate = sf::Time::Zero;
     }
 }

@@ -12,7 +12,6 @@ Snake::Snake()
 
     snakeX.push_back(304.f);
     snakeY.push_back(240.f);
-    count = 0;
     speed = 200;
 
     dirX = 0;
@@ -69,6 +68,18 @@ bool Snake::checkBorder()
     return false;
 }
 
+bool Snake::checkCollision()
+{
+    for (int i = 4; i <= total; i++)
+    {
+        if ((snakeX[i] == snakeX[0]) && (snakeY[i] == snakeY[0]))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 void Snake::swapAtBorder()
 {
 
@@ -98,4 +109,20 @@ bool Snake::checkReverse(int keyX, int keyY)
     }
 
     return false;
+}
+
+void Snake::reset()
+{
+    snakeX.clear();
+    snakeY.clear();
+
+    snakeX.shrink_to_fit();
+    snakeY.shrink_to_fit();
+
+    dirX = 0;
+    dirY = 0;
+    spriteSnake.setPosition(304.f, 240.f);
+    total = 0;
+    snakeX.push_back(304.f);
+    snakeY.push_back(240.f);
 }

@@ -51,6 +51,7 @@ public:
     void draw(sf::RenderWindow &mWindow);
     void updateNumber();
     void changePositionGameOver();
+    void reset();
 
 private:
     int scoreCount;
@@ -61,6 +62,7 @@ class MainMenu
 public:
     MainMenu(GameFont &fonts);
     void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
+    bool PressedEnter;
 
 private:
     sf::Text textTitle;
@@ -78,7 +80,6 @@ private:
     void changeCurrent();
 
     CurrentMenu current;
-    bool PressedEnter;
     int dir;
 };
 
@@ -87,15 +88,20 @@ class GameOver
 public:
     GameOver(GameFont &fonts, Score *ScoreClass);
     void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
+    bool PressedEnter;
 
 private:
     void render(sf::RenderWindow &mWindow);
     void processEvents(sf::RenderWindow &mWindow);
     void handlePlayerInput(sf::Keyboard::Key key);
+    void animate(sf::Time deltaTime);
     sf::Texture textureBackground;
     sf::Sprite spriteBackground;
     Score *ScoreSprite;
-    bool PressedEnter;
+    bool isVisible;
+    sf::Text textGameOver;
+    sf::Text textInstruction;
+    sf::Time timeSinceLastUpdate;
 };
 
 class Snake
@@ -109,10 +115,11 @@ public:
     void moveSnake();
     bool checkBorder();
     void swapAtBorder();
+    bool checkCollision();
+    void reset();
     int dirX;
     int dirY;
     int total;
-    int count;
     int speed;
     bool checkReverse(int keyX, int keyY);
 
@@ -125,6 +132,7 @@ class Game
 public:
     Game(Score *ScoreClass);
     void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
+    bool isAlive;
 
 private:
     void processEvents(sf::RenderWindow &mWindow);
@@ -142,7 +150,7 @@ private:
     bool mIsMovingRight;
     bool mIsMovingDown;
     bool mIsMovingUp;
-    bool isAlive;
+
     sf::Texture textureBackground;
     sf::Sprite spriteBackground;
     int count;

@@ -6,7 +6,7 @@ int main()
     sf::Vector2i v1(500, 200);
     mWindow.setPosition(v1);
 
-    GameStates CurrentState = GameOverState;
+    GameStates CurrentState = MenuState;
     GameFont fonts;
 
     Score gamesScore(fonts);
@@ -21,14 +21,17 @@ int main()
         case ManualState:
             break;
         case MenuState:
+            menu.PressedEnter = false;
             menu.run(mWindow, CurrentState);
             break;
         case OptionState:
             break;
         case RunningState:
+            game.isAlive = true;
             game.run(mWindow, CurrentState);
             break;
         case GameOverState:
+            gameOverScreen.PressedEnter = false;
             gameOverScreen.run(mWindow, CurrentState);
             break;
         case HighScoreState:

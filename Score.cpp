@@ -32,5 +32,14 @@ void Score::updateNumber()
 void Score::changePositionGameOver()
 {
     textScore.setPosition(100.f, 202.f);
-    textNumber.setPosition(240.f, 202.f);
+    sf::FloatRect bounds = textNumber.getLocalBounds();
+    textNumber.setPosition(515.f - bounds.width, 202.f);
+}
+
+void Score::reset()
+{
+    scoreCount = 0;
+    textNumber.setString(std::to_string(scoreCount));
+    textScore.setPosition(50.f, 44.f);
+    textNumber.setPosition(190.f, 44.f);
 }
