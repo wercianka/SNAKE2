@@ -10,4 +10,8 @@ GameFont::GameFont()
     {
         // error...
     }
+    if (!chary.loadFromFile("snake/chary.ttf"))
+    {
+        // error...
+    }
 }

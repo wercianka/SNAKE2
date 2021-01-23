@@ -18,3 +18,4 @@ enum CurrentMenu
     Option,
     Quit
 };
+

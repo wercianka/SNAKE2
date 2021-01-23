@@ -23,30 +23,25 @@ HighScore::HighScore(GameFont &fonts)
     textInstruction.setFillColor(sf::Color::White);
     textInstruction.setPosition(242.f, 400.f);
 
-    textScore1.setFont(fonts.slkscrb);
-    textScore1.setCharacterSize(30);
+    textScore1.setFont(fonts.chary);
+    textScore1.setCharacterSize(36);
     textScore1.setFillColor(sf::Color::White);
-    textScore1.setPosition(390.f, 140.f);
 
-    textScore2.setFont(fonts.slkscrb);
-    textScore2.setCharacterSize(30);
+    textScore2.setFont(fonts.chary);
+    textScore2.setCharacterSize(36);
     textScore2.setFillColor(sf::Color::White);
-    textScore2.setPosition(390.f, 190.f);
 
-    textScore3.setFont(fonts.slkscrb);
-    textScore3.setCharacterSize(30);
+    textScore3.setFont(fonts.chary);
+    textScore3.setCharacterSize(36);
     textScore3.setFillColor(sf::Color::White);
-    textScore3.setPosition(390.f, 240.f);
 
-    textScore4.setFont(fonts.slkscrb);
-    textScore4.setCharacterSize(30);
+    textScore4.setFont(fonts.chary);
+    textScore4.setCharacterSize(36);
     textScore4.setFillColor(sf::Color::White);
-    textScore4.setPosition(390.f, 290.f);
 
-    textScore5.setFont(fonts.slkscrb);
-    textScore5.setCharacterSize(30);
+    textScore5.setFont(fonts.chary);
+    textScore5.setCharacterSize(36);
     textScore5.setFillColor(sf::Color::White);
-    textScore5.setPosition(390.f, 340.f);
 
     for (int i = 0; i < 5; i++)
     {
@@ -213,26 +208,44 @@ void HighScore::setScore(int score)
 void HighScore::setTextSprites()
 {
     int i = 0;
-    textScore5.setString(std::to_string(scoreArray[i]));
+    std::string temp = dots;
+    int digits = numDigits(scoreArray[i]);
+    temp = temp.replace((temp.size() - digits), digits, std::to_string(scoreArray[i]));
+    textScore5.setString(temp);
     sf::FloatRect bounds = textScore5.getLocalBounds();
-    textScore5.setPosition(480.f - bounds.width, 340.f);
+    textScore5.setPosition(510.f - bounds.width, 335.f);
     i++;
-    textScore4.setString(std::to_string(scoreArray[i]));
+
+    temp = dots;
+    digits = numDigits(scoreArray[i]);
+    temp = temp.replace((temp.size() - digits), digits, std::to_string(scoreArray[i]));
+    textScore4.setString(temp);
     bounds = textScore4.getLocalBounds();
-    textScore4.setPosition(480.f - bounds.width, 290.f);
+    textScore4.setPosition(510.f - bounds.width, 285.f);
     i++;
-    textScore3.setString(std::to_string(scoreArray[i]));
+
+    temp = dots;
+    digits = numDigits(scoreArray[i]);
+    temp = temp.replace((temp.size() - digits), digits, std::to_string(scoreArray[i]));
+    textScore3.setString(temp);
     bounds = textScore3.getLocalBounds();
-    textScore3.setPosition(480.f - bounds.width, 240.f);
+    textScore3.setPosition(510.f - bounds.width, 235.f);
     i++;
-    textScore2.setString(std::to_string(scoreArray[i]));
+
+    temp = dots;
+    digits = numDigits(scoreArray[i]);
+    temp = temp.replace((temp.size() - digits), digits, std::to_string(scoreArray[i]));
+    textScore2.setString(temp);
     bounds = textScore2.getLocalBounds();
-    textScore2.setPosition(480.f - bounds.width, 190.f);
+    textScore2.setPosition(510.f - bounds.width, 185.f);
     i++;
-    textScore1.setString(std::to_string(scoreArray[i]));
+
+    temp = dots;
+    digits = numDigits(scoreArray[i]);
+    temp = temp.replace((temp.size() - digits), digits, std::to_string(scoreArray[i]));
+    textScore1.setString(temp);
     bounds = textScore1.getLocalBounds();
-    textScore1.setPosition(480.f - bounds.width, 140.f);
-    i++;
+    textScore1.setPosition(510.f - bounds.width, 135.f);
 
     if (updated)
     {
@@ -294,4 +307,15 @@ void HighScore::writeToFile()
         }
     }
     writeFile.close();
+}
+
+int HighScore::numDigits(int number)
+{
+    int digits = 0;
+    while (number)
+    {
+        number /= 10;
+        digits++;
+    }
+    return digits;
 }

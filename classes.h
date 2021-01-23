@@ -26,6 +26,7 @@ public:
     GameFont();
     sf::Font slkscrb;
     sf::Font kongtext;
+    sf::Font chary;
 };
 
 class Apple
@@ -125,12 +126,14 @@ private:
     void setTextSprites();
     void resetHighlight();
     void writeToFile();
+    int numDigits(int number);
 
     int updated;
     int scoreArray[5];
     sf::Texture textureBackground;
     sf::Sprite spriteBackground;
     bool isVisible;
+    std::string const dots = "......................";
 
     sf::Text textHighScore;
     sf::Text textInstruction;
