@@ -123,6 +123,8 @@ private:
     void updateScoreArray();
     void sort();
     void setTextSprites();
+    void resetHighlight();
+    void writeToFile();
 
     int updated;
     int scoreArray[5];

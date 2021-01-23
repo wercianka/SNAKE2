@@ -66,9 +66,10 @@ void HighScore::run(sf::RenderWindow &mWindow, GameStates &CurrentState)
     sf::Clock clock;
     clock.restart();
     timeSinceLastUpdate = sf::Time::Zero;
-    updated = 0;
+    resetHighlight();
     updateScoreArray();
     setTextSprites();
+    writeToFile();
     while (mWindow.isOpen() && !PressedEnter)
     {
         processEvents(mWindow);
@@ -254,4 +255,43 @@ void HighScore::setTextSprites()
             break;
         }
     }
+}
+
+void HighScore::resetHighlight()
+{
+    if (updated)
+    {
+        switch (updated)
+        {
+        case 1:
+            textScore5.setFillColor(sf::Color::White);
+            break;
+        case 2:
+            textScore4.setFillColor(sf::Color::White);
+            break;
+        case 3:
+            textScore3.setFillColor(sf::Color::White);
+            break;
+        case 4:
+            textScore2.setFillColor(sf::Color::White);
+            break;
+        case 5:
+            textScore1.setFillColor(sf::Color::White);
+            break;
+        }
+    }
+    updated = 0;
+}
+
+void HighScore::writeToFile()
+{
+    std::ofstream writeFile("highScore.txt");
+    if (writeFile.is_open())
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            writeFile << scoreArray[i] << '\n';
+        }
+    }
+    writeFile.close();
 }

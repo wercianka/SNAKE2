@@ -1,1 +1,1 @@
-g++ sfml.cpp Game.cpp Apple.cpp GameFont.cpp Lives.cpp Score.cpp Snake.cpp -ISFML2\include -DSFML_STATIC -LD:\Code\ccpp\snake2\SFML2\lib\ -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lfreetype -lwinmm -lgdi32  -mwindows
+g++ sfml.cpp Game.cpp Apple.cpp GameFont.cpp Lives.cpp Score.cpp Snake.cpp MainMenu.cpp GameOver.cpp HighScore.cpp -ISFML2\include -DSFML_STATIC -LSFML2\lib\ -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lfreetype -lwinmm -lgdi32  -mwindows
