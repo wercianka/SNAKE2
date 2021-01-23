@@ -12,7 +12,11 @@ Game::Game(Score *ScoreClass)
     count = 0;
     isAlive = true;
     ScoreSprite = ScoreClass;
+    isVisible = true;
+    timeSinceChange = sf::Time::Zero;
+    timeToChange = sf::Time::Zero;
 }
+
 void Game::run(sf::RenderWindow &mWindow, GameStates &CurrentState)
 {
     sf::Clock clock;
@@ -99,11 +103,29 @@ void Game::update(sf::Time deltaTime)
     timeSinceLastUpdate += deltaTime;
     if (timeSinceLastUpdate >= sf::milliseconds(SnakeSprite.speed))
     {
-
+        animate(deltaTime);
         if (SnakeSprite.checkBorder())
         {
-            SnakeSprite.moveSnake();
-            SnakeSprite.swapAtBorder();
+            if (deathOption)
+            {
+                if (SnakeSprite.state)
+                {
+                    SnakeSprite.lives--;
+                    if (SnakeSprite.lives == 0)
+                    {
+                        isAlive = false;
+                    }
+                    else
+                    {
+                        SnakeSprite.state = Hurt;
+                    }
+                }
+            }
+            else
+            {
+                SnakeSprite.moveSnake();
+                SnakeSprite.swapAtBorder();
+            }
         }
         else
         {
@@ -112,10 +134,17 @@ void Game::update(sf::Time deltaTime)
 
         if (SnakeSprite.checkCollision())
         {
-            SnakeSprite.lives--;
-            if (SnakeSprite.lives == 0)
+            if (SnakeSprite.state)
             {
-                isAlive = false;
+                SnakeSprite.lives--;
+                if (SnakeSprite.lives == 0)
+                {
+                    isAlive = false;
+                }
+                else
+                {
+                    SnakeSprite.state = Hurt;
+                }
             }
         }
         else
@@ -133,17 +162,20 @@ void Game::render(sf::RenderWindow &mWindow)
 
     switch (SnakeSprite.lives)
     {
-    case 3:
+    case 4:
         mWindow.draw(LivesSprite.spriteHeart3);
-    case 2:
+    case 3:
         mWindow.draw(LivesSprite.spriteHeart2);
-    case 1:
+    case 2:
         mWindow.draw(LivesSprite.spriteHeart);
     }
 
     ScoreSprite->draw(mWindow);
 
-    SnakeSprite.drawSnake(mWindow);
+    if (isVisible)
+    {
+        SnakeSprite.drawSnake(mWindow);
+    }
 
     AppleSprite.drawApple(mWindow);
 
@@ -160,5 +192,43 @@ void Game::checkFruit()
         SnakeSprite.snakeX.push_back(SnakeSprite.snakeX[0]);
         SnakeSprite.snakeY.push_back(SnakeSprite.snakeY[0]);
         ScoreSprite->updateNumber();
+    }
+}
+
+void Game::setSnakeSpeed(int value)
+{
+    switch (value)
+    {
+    case 1:
+        SnakeSprite.speed = 200;
+        break;
+    case 2:
+        SnakeSprite.speed = 150;
+        break;
+    case 3:
+        SnakeSprite.speed = 100;
+        break;
+    }
+}
+
+void Game::animate(sf::Time deltaTime)
+{
+    if (SnakeSprite.state == Hurt)
+    {
+        timeToChange += deltaTime;
+        if (isVisible)
+        {
+            isVisible = false;
+        }
+        else
+        {
+            isVisible = true;
+        }
+        if (timeToChange >= sf::milliseconds(300))
+        {
+            isVisible = true;
+            timeToChange = sf::Time::Zero;
+            SnakeSprite.state = Normal;
+        }
     }
 }

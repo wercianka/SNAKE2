@@ -6,13 +6,14 @@ int main()
     sf::Vector2i v1(500, 200);
     mWindow.setPosition(v1);
 
-    GameStates CurrentState = HighScoreState;
+    GameStates CurrentState = MenuState;
     GameFont fonts;
 
     Score gamesScore(fonts);
     Game game(&gamesScore);
     GameOver gameOverScreen(fonts, &gamesScore);
     HighScore highScoreScreen(fonts);
+    Options options(fonts);
 
     MainMenu menu(fonts);
     while (mWindow.isOpen())
@@ -26,6 +27,10 @@ int main()
             menu.run(mWindow, CurrentState);
             break;
         case OptionState:
+            options.PressedEnter = false;
+            options.run(mWindow, CurrentState);
+            game.setSnakeSpeed(options.currentSpeedOption);
+            game.deathOption = options.currentDeathOption;
             break;
         case RunningState:
             game.isAlive = true;

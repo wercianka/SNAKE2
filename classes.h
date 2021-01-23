@@ -84,6 +84,39 @@ private:
     int dir;
 };
 
+class Options
+{
+public:
+    Options(GameFont &fonts);
+    void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
+    bool PressedEnter;
+    int currentSpeedOption;
+    bool currentDeathOption;
+
+private:
+    void render(sf::RenderWindow &mWindow);
+    void processEvents(sf::RenderWindow &mWindow);
+    void update();
+    void handlePlayerInput(sf::Keyboard::Key key);
+    void changeCurrent();
+    void changeOption();
+
+    sf::Texture textureBackground;
+    sf::Sprite spriteBackground;
+    sf::Text textTitle;
+    sf::Text textSpeed;
+    sf::Text textDeath;
+    sf::Text textBack;
+
+    sf::Text textSpeedOption;
+    sf::Text textDeathOption;
+
+    int dir;
+    int dirY;
+
+    CurrentOption current;
+};
+
 class GameOver
 {
 public:
@@ -164,6 +197,7 @@ public:
     int speed;
     int lives;
     bool checkReverse(int keyX, int keyY);
+    SnakeState state;
 
 private:
     sf::Texture textureSnake;
@@ -175,6 +209,8 @@ public:
     Game(Score *ScoreClass);
     void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
     bool isAlive;
+    bool deathOption;
+    void setSnakeSpeed(int value);
 
 private:
     void processEvents(sf::RenderWindow &mWindow);
@@ -182,12 +218,13 @@ private:
     void render(sf::RenderWindow &mWindow);
     void handlePlayerInput(sf::Keyboard::Key key);
     void checkFruit();
+    void animate(sf::Time deltaTime);
+
     Lives LivesSprite;
     Snake SnakeSprite;
     Apple AppleSprite;
     Score *ScoreSprite;
 
-private:
     bool mIsMovingLeft;
     bool mIsMovingRight;
     bool mIsMovingDown;
@@ -196,5 +233,8 @@ private:
     sf::Texture textureBackground;
     sf::Sprite spriteBackground;
     int count;
+    bool isVisible;
     sf::Time timeSinceLastUpdate;
+    sf::Time timeSinceChange;
+    sf::Time timeToChange;
 };

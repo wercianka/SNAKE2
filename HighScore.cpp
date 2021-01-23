@@ -1,6 +1,5 @@
 #include "classes.h"
 #include <fstream>
-#include <iostream>
 
 HighScore::HighScore(GameFont &fonts)
 {
@@ -180,7 +179,6 @@ void HighScore::updateScoreArray()
     while ((scoreCount > scoreArray[i]) && (i != 5))
     {
         i++;
-        //std::cout << i << " " << scoreCount << " " << scoreArray[i - 1] << std::endl;
     }
     i--;
     if (i < 5)
@@ -188,13 +186,11 @@ void HighScore::updateScoreArray()
         int temp = scoreArray[i];
         scoreArray[i] = scoreCount;
         updated = i + 1;
-        //std::cout << updated << std::endl;
+
         for (int j = i - 1; j >= 0; j--)
         {
             int temp2 = scoreArray[j];
-            std::cout << "temp2 " << temp2 << std::endl;
             scoreArray[j] = temp;
-            std::cout << "temp " << temp << std::endl;
             temp = temp2;
         }
     }

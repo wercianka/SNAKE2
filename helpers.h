@@ -19,3 +19,15 @@ enum CurrentMenu
     Quit
 };
 
+enum CurrentOption
+{
+    Speed = 1,
+    Death,
+    Back
+};
+
+enum SnakeState
+{
+    Hurt = 0,
+    Normal
+};
