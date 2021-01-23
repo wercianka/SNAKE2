@@ -17,7 +17,6 @@ public:
 private:
     sf::Texture textureHeart;
     sf::IntRect rectSourceSprite = sf::IntRect(0, 0, 32, 32);
-    int count;
 };
 
 class GameFont
@@ -163,6 +162,7 @@ public:
     int dirY;
     int total;
     int speed;
+    int lives;
     bool checkReverse(int keyX, int keyY);
 
 private:

@@ -112,7 +112,11 @@ void Game::update(sf::Time deltaTime)
 
         if (SnakeSprite.checkCollision())
         {
-            isAlive = false;
+            SnakeSprite.lives--;
+            if (SnakeSprite.lives == 0)
+            {
+                isAlive = false;
+            }
         }
         else
         {
@@ -127,17 +131,21 @@ void Game::render(sf::RenderWindow &mWindow)
     mWindow.clear();
     mWindow.draw(spriteBackground);
 
-    mWindow.draw(LivesSprite.spriteHeart);
-    mWindow.draw(LivesSprite.spriteHeart2);
-    mWindow.draw(LivesSprite.spriteHeart3);
+    switch (SnakeSprite.lives)
+    {
+    case 3:
+        mWindow.draw(LivesSprite.spriteHeart3);
+    case 2:
+        mWindow.draw(LivesSprite.spriteHeart2);
+    case 1:
+        mWindow.draw(LivesSprite.spriteHeart);
+    }
 
     ScoreSprite->draw(mWindow);
 
     SnakeSprite.drawSnake(mWindow);
 
     AppleSprite.drawApple(mWindow);
-
-    //MainMenuSprite.draw(mWindow);
 
     mWindow.display();
 }

@@ -16,6 +16,7 @@ Snake::Snake()
 
     dirX = 0;
     dirY = 0;
+    lives = 3;
 }
 
 void Snake::drawSnake(sf::RenderWindow &mWindow)
@@ -125,4 +126,5 @@ void Snake::reset()
     total = 0;
     snakeX.push_back(304.f);
     snakeY.push_back(240.f);
+    lives = 3;
 }
