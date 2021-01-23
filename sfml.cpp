@@ -6,12 +6,13 @@ int main()
     sf::Vector2i v1(500, 200);
     mWindow.setPosition(v1);
 
-    GameStates CurrentState = MenuState;
+    GameStates CurrentState = HighScoreState;
     GameFont fonts;
 
     Score gamesScore(fonts);
     Game game(&gamesScore);
     GameOver gameOverScreen(fonts, &gamesScore);
+    HighScore highScoreScreen(fonts);
 
     MainMenu menu(fonts);
     while (mWindow.isOpen())
@@ -35,6 +36,9 @@ int main()
             gameOverScreen.run(mWindow, CurrentState);
             break;
         case HighScoreState:
+            highScoreScreen.setScore(gamesScore.returnScore());
+            highScoreScreen.PressedEnter = false;
+            highScoreScreen.run(mWindow, CurrentState);
             break;
         }
     }

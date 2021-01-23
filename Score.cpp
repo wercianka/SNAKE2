@@ -43,3 +43,8 @@ void Score::reset()
     textScore.setPosition(50.f, 44.f);
     textNumber.setPosition(190.f, 44.f);
 }
+
+int Score::returnScore()
+{
+    return scoreCount;
+}

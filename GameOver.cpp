@@ -44,8 +44,8 @@ void GameOver::run(sf::RenderWindow &mWindow, GameStates &CurrentState)
         render(mWindow);
         clock.restart();
     }
-    //CurrentState = HighScoreState;
-    CurrentState = MenuState;
+    mWindow.clear();
+    CurrentState = HighScoreState;
 }
 
 void GameOver::processEvents(sf::RenderWindow &mWindow)

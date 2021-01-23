@@ -52,6 +52,7 @@ public:
     void updateNumber();
     void changePositionGameOver();
     void reset();
+    int returnScore();
 
 private:
     int scoreCount;
@@ -101,6 +102,42 @@ private:
     bool isVisible;
     sf::Text textGameOver;
     sf::Text textInstruction;
+    sf::Time timeSinceLastUpdate;
+};
+
+class HighScore
+{
+public:
+    HighScore(GameFont &fonts);
+    void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
+    bool PressedEnter;
+    void setScore(int score);
+
+private:
+    int scoreCount;
+    void render(sf::RenderWindow &mWindow);
+    void processEvents(sf::RenderWindow &mWindow);
+    void handlePlayerInput(sf::Keyboard::Key key);
+    void animate(sf::Time deltaTime);
+    void readFromFile();
+    void updateScoreArray();
+    void sort();
+    void setTextSprites();
+
+    int updated;
+    int scoreArray[5];
+    sf::Texture textureBackground;
+    sf::Sprite spriteBackground;
+    bool isVisible;
+
+    sf::Text textHighScore;
+    sf::Text textInstruction;
+    sf::Text textScore1;
+    sf::Text textScore2;
+    sf::Text textScore3;
+    sf::Text textScore4;
+    sf::Text textScore5;
+
     sf::Time timeSinceLastUpdate;
 };
 
