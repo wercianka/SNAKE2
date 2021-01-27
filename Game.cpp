@@ -2,7 +2,7 @@
 
 Game::Game(Score *ScoreClass)
 {
-    if (!textureBackground.loadFromFile("snake/Sprite-0005.png"))
+    if (!textureBackground.loadFromFile("snake/running.png"))
     {
         // Handle loading error
     }

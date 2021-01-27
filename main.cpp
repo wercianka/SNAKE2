@@ -14,14 +14,15 @@ int main()
     GameOver gameOverScreen(fonts, &gamesScore);
     HighScore highScoreScreen(fonts);
     Options options(fonts);
-
+    Manual manual(fonts);
     MainMenu menu(fonts);
+
+    manual.run(mWindow);
+
     while (mWindow.isOpen())
     {
         switch (CurrentState)
         {
-        case ManualState:
-            break;
         case MenuState:
             menu.PressedEnter = false;
             menu.run(mWindow, CurrentState);

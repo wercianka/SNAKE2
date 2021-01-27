@@ -4,8 +4,7 @@ const sf::Time TimePerFrame = sf::seconds(1.f / 30.f);
 
 enum GameStates
 {
-    ManualState = 1,
-    MenuState,
+    MenuState = 1,
     OptionState,
     RunningState,
     GameOverState,

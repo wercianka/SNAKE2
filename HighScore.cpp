@@ -17,10 +17,10 @@ HighScore::HighScore(GameFont &fonts)
     textHighScore.setPosition(32.f, 30.f);
 
     textInstruction.setFont(fonts.slkscrb);
-    textInstruction.setString("wcisnij enter");
+    textInstruction.setString("press enter");
     textInstruction.setCharacterSize(14);
     textInstruction.setFillColor(sf::Color::White);
-    textInstruction.setPosition(242.f, 400.f);
+    textInstruction.setPosition(258.f, 400.f);
 
     textScore1.setFont(fonts.chary);
     textScore1.setCharacterSize(36);
@@ -308,6 +308,10 @@ void HighScore::writeToFile()
 int HighScore::numDigits(int number)
 {
     int digits = 0;
+    if (number == 0)
+    {
+        return 1;
+    }
     while (number)
     {
         number /= 10;

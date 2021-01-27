@@ -17,10 +17,10 @@ GameOver::GameOver(GameFont &fonts, Score *ScoreClass)
     textGameOver.setPosition(42.f, 95.f);
 
     textInstruction.setFont(fonts.slkscrb);
-    textInstruction.setString("wcisnij enter");
+    textInstruction.setString("press enter");
     textInstruction.setCharacterSize(14);
     textInstruction.setFillColor(sf::Color::White);
-    textInstruction.setPosition(242.f, 268.f);
+    textInstruction.setPosition(258.f, 268.f);
 
     PressedEnter = false;
     isVisible = true;

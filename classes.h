@@ -58,6 +58,25 @@ private:
     int scoreCount;
 };
 
+class Manual
+{
+public:
+    Manual(GameFont &fonts);
+    void run(sf::RenderWindow &mWindow);
+
+private:
+    void render(sf::RenderWindow &mWindow);
+    void processEvents(sf::RenderWindow &mWindow);
+    void handlePlayerInput(sf::Keyboard::Key key);
+    bool isVisible;
+    bool PressedEnter;
+    void animate(sf::Time deltaTime);
+    sf::Text textManual;
+    sf::Text textEnter;
+
+    sf::Time timeSinceLastUpdate;
+};
+
 class MainMenu
 {
 public:
