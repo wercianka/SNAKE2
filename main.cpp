@@ -17,7 +17,7 @@ int main()
     Manual manual(fonts);
     MainMenu menu(fonts);
 
-    manual.run(mWindow);
+    manual.run(mWindow); //wyswietlenie instrukcji obslugi przy starcie
 
     while (mWindow.isOpen())
     {

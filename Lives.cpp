@@ -2,10 +2,7 @@
 
 Lives::Lives()
 {
-    if (!textureHeart.loadFromFile("snake/heartsprite64W.png"))
-    {
-        // Handle loading error
-    }
+    textureHeart.loadFromFile("snake/heartsprite64W.png");
 
     spriteHeart.setTexture(textureHeart, false);
     spriteHeart.setTextureRect(rectSourceSprite);

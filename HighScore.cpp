@@ -3,10 +3,8 @@
 
 HighScore::HighScore(GameFont &fonts)
 {
-    if (!textureBackground.loadFromFile("snake/highScore.png"))
-    {
-        // Handle loading error
-    }
+    textureBackground.loadFromFile("snake/highScore.png");
+
     spriteBackground.setTexture(textureBackground);
     spriteBackground.setPosition(0.f, 0.f);
 
@@ -22,7 +20,7 @@ HighScore::HighScore(GameFont &fonts)
     textInstruction.setFillColor(sf::Color::White);
     textInstruction.setPosition(258.f, 400.f);
 
-    textScore1.setFont(fonts.chary);
+    textScore1.setFont(fonts.chary); //teksty pozycji w tabeli wynikow
     textScore1.setCharacterSize(36);
     textScore1.setFillColor(sf::Color::White);
 

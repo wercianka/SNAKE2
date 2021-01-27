@@ -2,10 +2,8 @@
 
 GameOver::GameOver(GameFont &fonts, Score *ScoreClass)
 {
-    if (!textureBackground.loadFromFile("snake/gameOver.png"))
-    {
-        // Handle loading error
-    }
+    textureBackground.loadFromFile("snake/gameOver.png");
+
     spriteBackground.setTexture(textureBackground);
     spriteBackground.setPosition(0.f, 0.f);
     ScoreSprite = ScoreClass;

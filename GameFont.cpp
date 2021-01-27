@@ -2,16 +2,7 @@
 
 GameFont::GameFont()
 {
-    if (!slkscrb.loadFromFile("snake/slkscrb.ttf"))
-    {
-        // error...
-    }
-    if (!kongtext.loadFromFile("snake/kongtext.ttf"))
-    {
-        // error...
-    }
-    if (!chary.loadFromFile("snake/chary.ttf"))
-    {
-        // error...
-    }
+    slkscrb.loadFromFile("snake/slkscrb.ttf");
+    kongtext.loadFromFile("snake/kongtext.ttf");
+    chary.loadFromFile("snake/chary.ttf");
 }

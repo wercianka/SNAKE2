@@ -26,7 +26,7 @@ void Manual::run(sf::RenderWindow &mWindow)
     sf::Clock clock;
     clock.restart();
     timeSinceLastUpdate = sf::Time::Zero;
-    while (mWindow.isOpen() && !PressedEnter)
+    while (mWindow.isOpen() && !PressedEnter) //dopoki nie wcisniety enter
     {
         processEvents(mWindow);
 

@@ -11,8 +11,8 @@ public:
     sf::Sprite spriteHeart;
     sf::Sprite spriteHeart2;
     sf::Sprite spriteHeart3;
-    void setLivesSpritePosition(sf::Time deltaTime);
-    sf::Time timeSinceLastUpdate;
+    void setLivesSpritePosition(sf::Time deltaTime); //ustawia obszar z tekstury do wyswietlenia
+    sf::Time timeSinceLastUpdate;                    //czas animacji
 
 private:
     sf::Texture textureHeart;
@@ -23,7 +23,7 @@ class GameFont
 {
 public:
     GameFont();
-    sf::Font slkscrb;
+    sf::Font slkscrb; //czcionki uzyte w grze
     sf::Font kongtext;
     sf::Font chary;
 };
@@ -32,11 +32,11 @@ class Apple
 {
 public:
     Apple();
-    int appleX;
-    int appleY;
+    int appleX; //wspolrzedna X polozenia owocu
+    int appleY; //wspolrzedna Y polozenia owocu
     sf::Sprite spriteApple;
     void drawApple(sf::RenderWindow &mWindow);
-    void generate();
+    void generate(); //generuje polozenie owocu
 
 private:
     sf::Texture textureApple;
@@ -49,13 +49,13 @@ public:
     sf::Text textScore;
     sf::Text textNumber;
     void draw(sf::RenderWindow &mWindow);
-    void updateNumber();
-    void changePositionGameOver();
-    void reset();
-    int returnScore();
+    void updateNumber();           //aktualizuje tekst do wyswielenia aktualnego wyniku
+    void changePositionGameOver(); //zmiena polozenie tekstu dla stanu GameOver
+    void reset();                  //resetuje wartosci
+    int returnScore();             //zwraca scoreCount
 
 private:
-    int scoreCount;
+    int scoreCount; //aktualny wynik
 };
 
 class Manual
@@ -68,13 +68,13 @@ private:
     void render(sf::RenderWindow &mWindow);
     void processEvents(sf::RenderWindow &mWindow);
     void handlePlayerInput(sf::Keyboard::Key key);
-    bool isVisible;
+    bool isVisible; //czy ma byc wyswietlony napis "press enter"
     bool PressedEnter;
-    void animate(sf::Time deltaTime);
+    void animate(sf::Time deltaTime); //animacja migania "pressed enter"
     sf::Text textManual;
     sf::Text textEnter;
 
-    sf::Time timeSinceLastUpdate;
+    sf::Time timeSinceLastUpdate; //czas od ostaniej zmiany isVisible
 };
 
 class MainMenu
@@ -95,12 +95,12 @@ private:
 
     void render(sf::RenderWindow &mWindow);
     void processEvents(sf::RenderWindow &mWindow);
-    void update();
+    void update(); //wywoluje changeCurrent()
     void handlePlayerInput(sf::Keyboard::Key key);
-    void changeCurrent();
+    void changeCurrent(); //zmiena aktualnie podswietlana pozycje
 
-    CurrentMenu current;
-    int dir;
+    CurrentMenu current; //aktualnie podswietlana pozycja
+    int dir;             //kierunek pionowy do zmiany aktualnie podswietlanej pozycji
 };
 
 class Options
@@ -115,10 +115,10 @@ public:
 private:
     void render(sf::RenderWindow &mWindow);
     void processEvents(sf::RenderWindow &mWindow);
-    void update();
+    void update(); //wywoluje changeCurrent()
     void handlePlayerInput(sf::Keyboard::Key key);
-    void changeCurrent();
-    void changeOption();
+    void changeCurrent(); //zmiena aktualnie podswietlana pozycje
+    void changeOption();  //zmiena wartosc opcji aktualnie podswietlanej
 
     sf::Texture textureBackground;
     sf::Sprite spriteBackground;
@@ -130,10 +130,10 @@ private:
     sf::Text textSpeedOption;
     sf::Text textDeathOption;
 
-    int dir;
-    int dirY;
+    int dir;  //kierunek pionowy do zmiany aktualnie podswietlanej pozycji
+    int dirY; //kierunek poziomy do zmiany opcji dla aktualnie podswietlanej pozycji
 
-    CurrentOption current;
+    CurrentOption current; //aktualnie podswietlana pozycja
 };
 
 class GameOver
@@ -147,14 +147,14 @@ private:
     void render(sf::RenderWindow &mWindow);
     void processEvents(sf::RenderWindow &mWindow);
     void handlePlayerInput(sf::Keyboard::Key key);
-    void animate(sf::Time deltaTime);
+    void animate(sf::Time deltaTime); //animacja migania "pressed enter"
     sf::Texture textureBackground;
     sf::Sprite spriteBackground;
     Score *ScoreSprite;
-    bool isVisible;
+    bool isVisible; //czy ma byc wyswietlony napis "press enter"
     sf::Text textGameOver;
     sf::Text textInstruction;
-    sf::Time timeSinceLastUpdate;
+    sf::Time timeSinceLastUpdate; //czas od ostaniej zmiany isVisible
 };
 
 class HighScore
@@ -163,27 +163,27 @@ public:
     HighScore(GameFont &fonts);
     void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
     bool PressedEnter;
-    void setScore(int score);
+    void setScore(int score); //ustawia wynik do zmiennej scoreCount
 
 private:
-    int scoreCount;
+    int scoreCount; //uzyskany wynik
     void render(sf::RenderWindow &mWindow);
     void processEvents(sf::RenderWindow &mWindow);
     void handlePlayerInput(sf::Keyboard::Key key);
-    void animate(sf::Time deltaTime);
-    void readFromFile();
-    void updateScoreArray();
-    void sort();
-    void setTextSprites();
-    void resetHighlight();
-    void writeToFile();
-    int numDigits(int number);
+    void animate(sf::Time deltaTime); //animacja migania "pressed enter"
+    void readFromFile();              //wczytywanie z pliku jesli istnieje wynikow do tabeli
+    void updateScoreArray();          //dodaje nowy wynik do tabeli
+    void sort();                      //sortowanie wynikow w tabeli
+    void setTextSprites();            //ustawia tekst spritow dla wynikow w tabeli
+    void resetHighlight();            //resetuje podswietlenie dla nowego wyniku w tabeli
+    void writeToFile();               //zapisuje tabele wynikow do pliku
+    int numDigits(int number);        //zlicza ilosc cyfr w przekazanej liczbie
 
-    int updated;
-    int scoreArray[5];
+    int updated;       //pozycja w tabeli wynikow na ktora ma trafic uzyskany wynik
+    int scoreArray[5]; //tabela wynikow
     sf::Texture textureBackground;
     sf::Sprite spriteBackground;
-    bool isVisible;
+    bool isVisible; //czy ma byc wyswietlony napis "press enter"
     std::string const dots = "......................";
 
     sf::Text textHighScore;
@@ -194,29 +194,29 @@ private:
     sf::Text textScore4;
     sf::Text textScore5;
 
-    sf::Time timeSinceLastUpdate;
+    sf::Time timeSinceLastUpdate; //czas od ostaniej zmiany isVisible
 };
 
 class Snake
 {
 public:
     Snake();
-    std::vector<int> snakeX;
-    std::vector<int> snakeY;
+    std::vector<int> snakeX; //wektor ze wspolrzedna X
+    std::vector<int> snakeY; //wektor ze wspolrzedna Y
     sf::Sprite spriteSnake;
     void drawSnake(sf::RenderWindow &mWindow);
-    void moveSnake();
-    bool checkBorder();
-    void swapAtBorder();
-    bool checkCollision();
-    void reset();
-    int dirX;
-    int dirY;
-    int total;
-    int speed;
-    int lives;
-    bool checkReverse(int keyX, int keyY);
-    SnakeState state;
+    void moveSnake();                      //przesuwa polozenie weza
+    bool checkBorder();                    //sprawdza kolizje z krawedzami
+    void swapAtBorder();                   //przemieszcza weza na drugi koniec
+    bool checkCollision();                 //sprawdza kolizja glowy weza z jego cialem
+    void reset();                          //resetuje wartosci
+    int dirX;                              //kierunek X poruszania sie weza
+    int dirY;                              //kierunek Y poruszania sie weza
+    int total;                             //ilosc kawalkow weza
+    int speed;                             //szybkosc z jaka ma poruszac sie waz wyrazana w ms
+    int lives;                             //ilosc zyc
+    bool checkReverse(int keyX, int keyY); //uniemozliwia cofanie sie weza, zwraca true jesli bedzie kolizja glowy z cialem w podanym kierunku
+    SnakeState state;                      //Normal, Hurt - okres po utracie zycia, w ktorym nie moze ponownie go utracic
 
 private:
     sf::Texture textureSnake;
@@ -227,33 +227,26 @@ class Game
 public:
     Game(Score *ScoreClass);
     void run(sf::RenderWindow &mWindow, GameStates &CurrentState);
-    bool isAlive;
-    bool deathOption;
-    void setSnakeSpeed(int value);
+    bool isAlive;                  //czy skonczyc gre
+    bool deathOption;              //czy jest wlaczona opcja smierci po dotknieciu krawedzi
+    void setSnakeSpeed(int value); //ustawia szybkosc poruszania sie weza
 
 private:
     void processEvents(sf::RenderWindow &mWindow);
     void update(sf::Time deltaTime);
     void render(sf::RenderWindow &mWindow);
     void handlePlayerInput(sf::Keyboard::Key key);
-    void checkFruit();
-    void animate(sf::Time deltaTime);
+    void checkFruit();                //sprawdza czy glowa weza znajduje sie w tym samym miejscu co owoc
+    void animate(sf::Time deltaTime); //animacja migania po utracie zycia
 
     Lives LivesSprite;
     Snake SnakeSprite;
     Apple AppleSprite;
     Score *ScoreSprite;
 
-    bool mIsMovingLeft;
-    bool mIsMovingRight;
-    bool mIsMovingDown;
-    bool mIsMovingUp;
-
     sf::Texture textureBackground;
     sf::Sprite spriteBackground;
-    int count;
-    bool isVisible;
-    sf::Time timeSinceLastUpdate;
-    sf::Time timeSinceChange;
-    sf::Time timeToChange;
+    bool isVisible;               //czy waz ma byc renderowany
+    sf::Time timeSinceLastUpdate; //czas od ostatniego wywolania funkcji update()
+    sf::Time timeToChange;        //czas od zmianu stanu weza z Normal na Hurt
 };

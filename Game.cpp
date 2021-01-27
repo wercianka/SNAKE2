@@ -2,18 +2,15 @@
 
 Game::Game(Score *ScoreClass)
 {
-    if (!textureBackground.loadFromFile("snake/running.png"))
-    {
-        // Handle loading error
-    }
+    textureBackground.loadFromFile("snake/running.png");
 
     spriteBackground.setTexture(textureBackground);
     spriteBackground.setPosition(0.f, 0.f);
-    count = 0;
+
     isAlive = true;
     ScoreSprite = ScoreClass;
     isVisible = true;
-    timeSinceChange = sf::Time::Zero;
+
     timeToChange = sf::Time::Zero;
 }
 
@@ -25,8 +22,10 @@ void Game::run(sf::RenderWindow &mWindow, GameStates &CurrentState)
 
     ScoreSprite->reset();
     SnakeSprite.reset();
+    isVisible = true;
+    timeToChange = sf::Time::Zero;
 
-    while (mWindow.isOpen() && isAlive)
+    while (mWindow.isOpen() && isAlive) //dopoki nie skonczyly sie zycia
     {
         processEvents(mWindow);
 
@@ -48,7 +47,7 @@ void Game::handlePlayerInput(sf::Keyboard::Key key)
 {
     if (key == sf::Keyboard::W)
     {
-        if (!SnakeSprite.checkReverse(0, -1))
+        if (!SnakeSprite.checkReverse(0, -1)) //jezeli nie koliduje z cialem weza zaraz za glowa
         {
             SnakeSprite.dirX = 0;
             SnakeSprite.dirY = -1;
@@ -92,7 +91,6 @@ void Game::processEvents(sf::RenderWindow &mWindow)
             break;
         case sf::Event::Closed:
             mWindow.close();
-
             break;
         }
     }
@@ -104,11 +102,11 @@ void Game::update(sf::Time deltaTime)
     if (timeSinceLastUpdate >= sf::milliseconds(SnakeSprite.speed))
     {
         animate(deltaTime);
-        if (SnakeSprite.checkBorder())
+        if (SnakeSprite.checkBorder()) //sprawdz czy koliduje z krawedzia
         {
-            if (deathOption)
+            if (deathOption) //jezeli wlaczona opcja smierci na krawedzi
             {
-                if (SnakeSprite.state)
+                if (SnakeSprite.state) //jezeli state == Normal
                 {
                     SnakeSprite.lives--;
                     if (SnakeSprite.lives == 0)
@@ -132,9 +130,9 @@ void Game::update(sf::Time deltaTime)
             SnakeSprite.moveSnake();
         }
 
-        if (SnakeSprite.checkCollision())
+        if (SnakeSprite.checkCollision()) //kolizja glowy z cialem weza
         {
-            if (SnakeSprite.state)
+            if (SnakeSprite.state) //jezeli state == Normal
             {
                 SnakeSprite.lives--;
                 if (SnakeSprite.lives == 0)
@@ -149,7 +147,7 @@ void Game::update(sf::Time deltaTime)
         }
         else
         {
-            checkFruit();
+            checkFruit(); //sprawdz pozycje glowy i owocu
         }
         timeSinceLastUpdate = sf::Time::Zero;
     }
@@ -188,10 +186,10 @@ void Game::checkFruit()
         (SnakeSprite.snakeY[0] == AppleSprite.appleY))
     {
         AppleSprite.generate();
-        SnakeSprite.total++;
-        SnakeSprite.snakeX.push_back(SnakeSprite.snakeX[0]);
+        SnakeSprite.total++;                                 //zwieksz ilosc ciala weza
+        SnakeSprite.snakeX.push_back(SnakeSprite.snakeX[0]); //dodaj pozycje do vektora wspolrzednych weza
         SnakeSprite.snakeY.push_back(SnakeSprite.snakeY[0]);
-        ScoreSprite->updateNumber();
+        ScoreSprite->updateNumber(); //zaktualizuj wynik
     }
 }
 

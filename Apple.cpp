@@ -3,10 +3,8 @@
 
 Apple::Apple()
 {
-    if (!textureApple.loadFromFile("snake/apple4.png"))
-    {
-        // Handle loading error
-    }
+    textureApple.loadFromFile("snake/apple4.png");
+
     generate();
     spriteApple.setTexture(textureApple, false);
     spriteApple.setPosition((float)appleX, (float)appleY);

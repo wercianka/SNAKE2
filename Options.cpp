@@ -2,10 +2,7 @@
 
 Options::Options(GameFont &fonts)
 {
-    if (!textureBackground.loadFromFile("snake/options.png"))
-    {
-        // Handle loading error
-    }
+    textureBackground.loadFromFile("snake/options.png");
 
     spriteBackground.setTexture(textureBackground);
     spriteBackground.setPosition(0.f, 0.f);
@@ -252,7 +249,6 @@ void Options::render(sf::RenderWindow &mWindow)
 
     mWindow.draw(textSpeedOption);
     mWindow.draw(textDeathOption);
-    //mWindow.draw(textExplanation);
 
     mWindow.display();
 }

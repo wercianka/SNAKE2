@@ -2,10 +2,7 @@
 
 MainMenu::MainMenu(GameFont &fonts)
 {
-    if (!textureBackground.loadFromFile("snake/titleScreen.png"))
-    {
-        // Handle loading error
-    }
+    textureBackground.loadFromFile("snake/titleScreen.png");
 
     spriteBackground.setTexture(textureBackground);
     spriteBackground.setPosition(0.f, 0.f);

@@ -2,10 +2,8 @@
 
 Snake::Snake()
 {
-    if (!textureSnake.loadFromFile("snake/snake3.png"))
-    {
-        // Handle loading error
-    }
+    textureSnake.loadFromFile("snake/snake3.png");
+
     spriteSnake.setTexture(textureSnake, false);
     spriteSnake.setPosition(304.f, 240.f);
     total = 0;
@@ -115,7 +113,7 @@ bool Snake::checkReverse(int keyX, int keyY)
 
 void Snake::reset()
 {
-    snakeX.clear();
+    snakeX.clear(); //wyczysc vektor
     snakeY.clear();
 
     snakeX.shrink_to_fit();
@@ -128,4 +126,5 @@ void Snake::reset()
     snakeX.push_back(304.f);
     snakeY.push_back(240.f);
     lives = 4;
+    state = Normal;
 }
